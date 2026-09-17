@@ -87,6 +87,34 @@ public class ArvoreBinariaMorse {
     }
 
 
+    public void exibirArvore() {
+        if (raiz == null) {
+            System.out.println("Árvore vazia!");
+            return;
+        }
+        System.out.println("Raiz [*]");
+        // O filho à esquerda representa o ponto (.) e o da direita o traço (-)
+        exibirArvore(raiz.esquerda, "", true, ".");
+        exibirArvore(raiz.direita, "", false, "-");
+    }
+
+    private void exibirArvore(No no, String prefixo, boolean isEsquerda, String simboloMorse) {
+        if (no == null) return;
+
+        // Se o dado for espaço (vazio), exibe um asterisco (*) para facilitar a visualização
+        char caractere = (no.dado == ' ' || no.dado == '\0') ? '*' : no.dado;
+        
+        System.out.println(prefixo + (isEsquerda ? "├── " : "└── ") + simboloMorse + " -> " + caractere);
+
+        // Define a formatação das linhas verticais para os próximos níveis
+        String novoPrefixo = prefixo + (isEsquerda ? "│   " : "    ");
+
+        // Chamadas recursivas
+        exibirArvore(no.esquerda, novoPrefixo, true, ".");
+        exibirArvore(no.direita, novoPrefixo, false, "-");
+    }
+
+
 
     public static void main(String[] args) {
         ArvoreBinariaMorse arvore = new ArvoreBinariaMorse();
@@ -134,5 +162,7 @@ public class ArvoreBinariaMorse {
         arvore.buscaPalavra("... --- ...");
         arvore.buscaPalavra(".--.");
         arvore.buscaPalavra(".-.");
+
+        arvore.exibirArvore();
     }
 }
