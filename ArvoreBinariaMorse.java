@@ -87,6 +87,7 @@ public class ArvoreBinariaMorse {
     }
 
 
+    // CÓDIGO INTEGRALMENTE CRIADO POR IA
     public void exibirArvore() {
         if (raiz == null) {
             System.out.println("Árvore vazia!");
